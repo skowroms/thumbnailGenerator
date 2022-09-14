@@ -65,7 +65,7 @@ class GenerateThumbnails extends Command
     {
         try {
             $fileStorage = new FileStorageGateway();
-            return $fileStorage->getImageFiles($localDirectoryPath);
+            return $fileStorage->getFiles($localDirectoryPath);
         } catch (OutputStorageIsNotWritable $e) {
             $this->errors[] = 'Input directory not found';
         } catch (DirectoryReadError $e) {

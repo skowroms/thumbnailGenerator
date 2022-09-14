@@ -4,7 +4,7 @@ namespace App\Gateway;
 
 interface StorageGateway
 {
-    public function getImageFiles($directoryPath);
+    public function getFiles($directoryPath);
 
     public function isOutputWritable($outputPath): bool;
 

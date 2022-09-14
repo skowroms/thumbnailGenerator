@@ -8,6 +8,7 @@ use App\Exception\SaveFileStorageError;
 use App\Gateway\StorageGateway;
 use FilesystemIterator;
 use SplFileInfo;
+use Symfony\Component\Filesystem\Path;
 
 class FileStorageGateway implements StorageGateway
 {
@@ -32,7 +33,7 @@ class FileStorageGateway implements StorageGateway
      * @throws OutputStorageIsNotWritable
      * @throws DirectoryReadError
      */
-    public function getImageFiles($directoryPath): array
+    public function getFiles($directoryPath): array
     {
         $result = array();
         $this->validateDirectory($directoryPath);
@@ -54,7 +55,7 @@ class FileStorageGateway implements StorageGateway
     public function saveImage(string $outputPath, string $fileName, string $blob): bool
     {
         try {
-            file_put_contents($outputPath . '//' . $fileName, $blob);
+            file_put_contents(Path::join($outputPath, $fileName), $blob);
             return true;
         } catch (\Exception $e) {
             return false;

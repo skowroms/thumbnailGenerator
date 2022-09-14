@@ -5,11 +5,12 @@ namespace App\GatewayImpl;
 use App\Gateway\StorageGateway;
 use Aws\Exception\MultipartUploadException;
 use Aws\S3\S3Client;
+use Symfony\Component\Filesystem\Path;
 
 class s3BucketStorageGateway implements StorageGateway
 {
 
-    public function getImageFiles($directoryPath)
+    public function getFiles($directoryPath)
     {
         // TODO: Implement getImageFiles() method.
     }
@@ -29,7 +30,7 @@ class s3BucketStorageGateway implements StorageGateway
         try {
             $this->getClient()->putObject(array(
                 'Bucket' => $_ENV['S3_BUCKET'],
-                'Key' => $outputPath . '/'. $fileName,
+                'Key' => Path::join($outputPath, $fileName),
                 'Body' => $blob
             ));
             return true;

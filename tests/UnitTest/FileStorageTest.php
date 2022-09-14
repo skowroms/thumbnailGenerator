@@ -23,7 +23,7 @@ class FileStorageTest extends TestCase
     {
         $storage = new App\GatewayImpl\FileStorageGateway();
         $this->expectException(App\Exception\OutputStorageIsNotWritable::class);
-        $storage->getImageFiles('notFoundFolderPath');
+        $storage->getFiles('notFoundFolderPath');
     }
 
     /**
@@ -33,7 +33,7 @@ class FileStorageTest extends TestCase
     {
         $storage = new App\GatewayImpl\FileStorageGateway();
         $this->expectException(App\Exception\DirectoryReadError::class);
-        $storage->getImageFiles('file');
+        $storage->getFiles('tests/file');
     }
 
     /**
@@ -43,7 +43,7 @@ class FileStorageTest extends TestCase
     public function testImageList()
     {
         $storage = new App\GatewayImpl\FileStorageGateway();
-        $images = $storage->getImageFiles('tests/Resources/Images');
+        $images = $storage->getFiles('tests/Resources/Images');
 
         $this->assertTrue(count($images) == 2);
         foreach ($images as $image) {
